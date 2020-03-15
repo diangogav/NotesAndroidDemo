@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -23,7 +22,7 @@ public class NoteFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 2;
 
-    private List<Note> noteList;
+    private List<NoteEntity> noteEntityList;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -66,12 +65,12 @@ public class NoteFragment extends Fragment {
                 recyclerView.setLayoutManager(new StaggeredGridLayoutManager(mColumnCount, StaggeredGridLayoutManager.VERTICAL));
             }
 
-            noteList = new ArrayList<>();
-            noteList.add(new Note("Nota 1", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", false));
-            noteList.add(new Note("Nota 2", "descripción 2", true));
-            noteList.add(new Note("Nota 3", "descripción 3", false));
+            noteEntityList = new ArrayList<>();
+            noteEntityList.add(new NoteEntity("Nota 1", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", false));
+            noteEntityList.add(new NoteEntity("Nota 2", "descripción 2", true));
+            noteEntityList.add(new NoteEntity("Nota 3", "descripción 3", false));
 
-            recyclerView.setAdapter(new MyNoteRecyclerViewAdapter(noteList, getActivity()));
+            recyclerView.setAdapter(new MyNoteRecyclerViewAdapter(noteEntityList, getActivity()));
         }
         return view;
     }

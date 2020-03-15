@@ -13,10 +13,10 @@ import java.util.List;
 
 public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Note> mValues;
+    private final List<NoteEntity> mValues;
     private Context ctx;
 
-    public MyNoteRecyclerViewAdapter(List<Note> items, Context ctx) {
+    public MyNoteRecyclerViewAdapter(List<NoteEntity> items, Context ctx) {
         mValues = items;
         this.ctx = ctx;
     }
@@ -49,7 +49,7 @@ public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecycl
         public final TextView mTextViewTitle;
         public final TextView mTextViewContent;
         public final ImageView mImageViewFavorite;
-        public Note mItem;
+        public NoteEntity mItem;
 
         public ViewHolder(View view) {
             super(view);

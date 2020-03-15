@@ -1,14 +1,30 @@
 package com.example.notesapplication;
 
-public class Note {
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "notes")
+public class NoteEntity {
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     private String title;
     private String content;
     private boolean isFavorite;
+    private String color;
 
-    public Note(String title, String content, boolean isFavorite) {
+    public NoteEntity(String title, String content, boolean isFavorite, String color) {
         this.title = title;
         this.content = content;
         this.isFavorite = isFavorite;
+        this.color = color;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -33,5 +49,13 @@ public class Note {
 
     public void setFavorite(boolean favorite) {
         isFavorite = favorite;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }
