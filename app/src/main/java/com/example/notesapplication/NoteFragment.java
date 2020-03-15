@@ -7,14 +7,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.notesapplication.dummy.DummyContent;
-import com.example.notesapplication.dummy.DummyContent.DummyItem;
-
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,8 +27,10 @@ public class NoteFragment extends Fragment {
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
-    private int mColumnCount = 1;
+    private int mColumnCount = 2;
     private OnListFragmentInteractionListener mListener;
+
+    private List<Note> noteList;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -69,9 +70,15 @@ public class NoteFragment extends Fragment {
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+                recyclerView.setLayoutManager(new StaggeredGridLayoutManager(mColumnCount, StaggeredGridLayoutManager.VERTICAL));
             }
-            recyclerView.setAdapter(new MyNoteRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+
+            noteList = new ArrayList<>();
+            noteList.add(new Note("Nota 1", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", false));
+            noteList.add(new Note("Nota 2", "descripción 2", true));
+            noteList.add(new Note("Nota 3", "descripción 3", false));
+
+            recyclerView.setAdapter(new MyNoteRecyclerViewAdapter(noteList, mListener));
         }
         return view;
     }
@@ -106,6 +113,6 @@ public class NoteFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(Note item);
     }
 }

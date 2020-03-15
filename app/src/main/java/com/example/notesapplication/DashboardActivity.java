@@ -2,7 +2,6 @@ package com.example.notesapplication;
 
 import android.os.Bundle;
 
-import com.example.notesapplication.dummy.DummyContent;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +28,7 @@ public class DashboardActivity extends AppCompatActivity implements NoteFragment
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onListFragmentInteraction(Note item) {
 
     }
 }
