@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -21,6 +23,7 @@ public class NoteFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 2;
+    private MyNoteRecyclerViewAdapter noteAdapter;
 
     private List<NoteEntity> noteEntityList;
 
@@ -67,8 +70,22 @@ public class NoteFragment extends Fragment {
 
             noteEntityList = new ArrayList<>();
 
-            recyclerView.setAdapter(new MyNoteRecyclerViewAdapter(noteEntityList, getActivity()));
+            noteAdapter = new MyNoteRecyclerViewAdapter(noteEntityList, getActivity());
+
+            recyclerView.setAdapter(noteAdapter);
+
+            launchViewMode();
         }
         return view;
+    }
+
+    private void launchViewMode() {
+        NoteFragmentAddViewModel viewModelAddNote = ViewModelProviders.of(getActivity()).get(NoteFragmentAddViewModel.class);
+        viewModelAddNote.getAllNotes().observe(getActivity(), new Observer<List<NoteEntity>>() {
+            @Override
+            public void onChanged(List<NoteEntity> noteEntities) {
+                noteAdapter.setNoteList(noteEntities);
+            }
+        });
     }
 }

@@ -1,5 +1,6 @@
 package com.example.notesapplication;
 
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecyclerViewAdapter.ViewHolder> {
 
-    private final List<NoteEntity> mValues;
+    private List<NoteEntity> mValues;
     private Context ctx;
 
     public MyNoteRecyclerViewAdapter(List<NoteEntity> items, Context ctx) {
@@ -21,6 +22,9 @@ public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecycl
         this.ctx = ctx;
     }
 
+    public void setNoteList(List<NoteEntity> list) {
+        this.mValues = list;
+    }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())

@@ -1,6 +1,7 @@
 package com.example.notesapplication;
 
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.AlertDialog;
@@ -70,11 +71,16 @@ public class NoteFragmentAdd extends DialogFragment {
                         }
 
                         boolean isFavorite = switchFavorite.isChecked();
+
+                        // TODO: Buscar la manera correcta de utilizar el ViewModelProvider
+                        NoteFragmentAddViewModel viewModelAddNote = ViewModelProviders.of(getActivity()).get(NoteFragmentAddViewModel.class);
+                        viewModelAddNote.addNote(new NoteEntity(title, content, isFavorite, color));
+                        dialog.dismiss();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
+                        dialog.dismiss();
                     }
                 });
 
