@@ -15,11 +15,19 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.Switch;
 
 public class NoteFragmentAdd extends DialogFragment {
 
     private NoteFragmentAddViewModel mViewModel;
     private View view;
+
+    private EditText editTextTitle;
+    private EditText editTextContent;
+    private RadioGroup radioGroupColor;
+    private Switch switchFavorite;
 
     public static NoteFragmentAdd newInstance() {
         return new NoteFragmentAdd();
@@ -45,7 +53,23 @@ public class NoteFragmentAdd extends DialogFragment {
         builder.setMessage("Message")
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // FIRE ZE MISSILES!
+                        String title = editTextTitle.getText().toString();
+                        String content = editTextContent.getText().toString();
+                        String color = "Blue";
+
+                        switch (radioGroupColor.getCheckedRadioButtonId()) {
+                            case R.id.radioButtonColorBlue:
+                                color = "Blue";
+                                break;
+                            case R.id.radioButtonColorGreen:
+                                color = "Green";
+                                break;
+                            case R.id.radioButtonColorRed:
+                                color = "Red";
+                                break;
+                        }
+
+                        boolean isFavorite = switchFavorite.isChecked();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -55,6 +79,12 @@ public class NoteFragmentAdd extends DialogFragment {
                 });
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
+
+        editTextTitle = view.findViewById(R.id.editTextNoteAddTitle);
+        editTextContent = view.findViewById(R.id.editTextNoteAddContent);
+        radioGroupColor = view.findViewById(R.id.radioGroupNoteAddColor);
+        switchFavorite = view.findViewById(R.id.imageViewNoteFavorite);
+
         view = inflater.inflate(R.layout.note_fragment_add_fragment, null);
         builder.setView(view);
 
