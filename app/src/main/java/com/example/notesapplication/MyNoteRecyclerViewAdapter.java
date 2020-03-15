@@ -2,24 +2,23 @@ package com.example.notesapplication;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.notesapplication.NoteFragment.OnListFragmentInteractionListener;
-
 import java.util.List;
 
 public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecyclerViewAdapter.ViewHolder> {
 
     private final List<Note> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private Context ctx;
 
-    public MyNoteRecyclerViewAdapter(List<Note> items, OnListFragmentInteractionListener listener) {
+    public MyNoteRecyclerViewAdapter(List<Note> items, Context ctx) {
         mValues = items;
-        mListener = listener;
+        this.ctx = ctx;
     }
 
     @Override
@@ -38,17 +37,6 @@ public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecycl
         if(holder.mItem.isFavorite()) {
             holder.mImageViewFavorite.setImageResource(R.drawable.ic_star_black_24dp);
         }
-
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
-            }
-        });
     }
 
     @Override
