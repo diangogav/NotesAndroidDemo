@@ -3,14 +3,20 @@ package com.example.notesapplication;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -51,6 +57,9 @@ public class NoteFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
+        setHasOptionsMenu(true);
+
     }
 
     @Override
@@ -68,7 +77,7 @@ public class NoteFragment extends Fragment {
                 recyclerView.setLayoutManager(new StaggeredGridLayoutManager(mColumnCount, StaggeredGridLayoutManager.VERTICAL));
             }
 
-            noteEntityList = new ArrayList<>();
+            noteEntityList = new ArrayList<NoteEntity>();
 
             noteAdapter = new MyNoteRecyclerViewAdapter(noteEntityList, getActivity());
 
@@ -84,8 +93,31 @@ public class NoteFragment extends Fragment {
         viewModelAddNote.getAllNotes().observe(getActivity(), new Observer<List<NoteEntity>>() {
             @Override
             public void onChanged(List<NoteEntity> noteEntities) {
+                Log.d("NoteFragment", "onChanged Fire");
                 noteAdapter.setNoteList(noteEntities);
             }
         });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.options_menu_note_fragment, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_add_note:
+                showAddNoteDialog();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void showAddNoteDialog() {
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        NoteFragmentAdd dialogAddNote = new NoteFragmentAdd();
+        dialogAddNote.show(fm, "NoteFragmentAdd");
     }
 }

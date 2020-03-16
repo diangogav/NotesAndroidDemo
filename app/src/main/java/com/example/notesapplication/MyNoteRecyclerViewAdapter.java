@@ -24,6 +24,7 @@ public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecycl
 
     public void setNoteList(List<NoteEntity> list) {
         this.mValues = list;
+        notifyDataSetChanged();
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

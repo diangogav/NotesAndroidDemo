@@ -19,7 +19,7 @@ public class NoteFragmentAddViewModel extends AndroidViewModel {
         allNotes = noteRepository.getAllNotes();
     }
 
-    LiveData<List<NoteEntity>> getAllNotes() { return allNotes; }
+    public LiveData<List<NoteEntity>> getAllNotes() { return allNotes; }
 
     public void addNote(NoteEntity note) {
         noteRepository.insertNote(note);

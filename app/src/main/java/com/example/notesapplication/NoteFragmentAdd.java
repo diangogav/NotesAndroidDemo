@@ -23,16 +23,17 @@ import android.widget.Switch;
 public class NoteFragmentAdd extends DialogFragment {
 
     private NoteFragmentAddViewModel mViewModel;
-    private View view;
 
+    public static NoteFragmentAdd newInstance() {
+        return new NoteFragmentAdd();
+    }
+
+    private View view;
     private EditText editTextTitle;
     private EditText editTextContent;
     private RadioGroup radioGroupColor;
     private Switch switchFavorite;
 
-    public static NoteFragmentAdd newInstance() {
-        return new NoteFragmentAdd();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -43,7 +44,6 @@ public class NoteFragmentAdd extends DialogFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(NoteFragmentAddViewModel.class);
         // TODO: Use the ViewModel
     }
 
@@ -53,6 +53,7 @@ public class NoteFragmentAdd extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("Message")
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int id) {
                         String title = editTextTitle.getText().toString();
                         String content = editTextContent.getText().toString();
@@ -85,13 +86,13 @@ public class NoteFragmentAdd extends DialogFragment {
                 });
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
+        view = inflater.inflate(R.layout.note_fragment_add_fragment, null);
 
         editTextTitle = view.findViewById(R.id.editTextNoteAddTitle);
         editTextContent = view.findViewById(R.id.editTextNoteAddContent);
         radioGroupColor = view.findViewById(R.id.radioGroupNoteAddColor);
-        switchFavorite = view.findViewById(R.id.imageViewNoteFavorite);
+        switchFavorite = view.findViewById(R.id.switchNoteFavorite);
 
-        view = inflater.inflate(R.layout.note_fragment_add_fragment, null);
         builder.setView(view);
 
         // Create the AlertDialog object and return it
