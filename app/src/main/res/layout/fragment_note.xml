@@ -15,23 +15,26 @@
             android:id="@+id/textViewNoteTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Title"
+            android:layout_margin="8dp"
+            android:text="TextView"
             android:textStyle="bold"
             android:ellipsize="end"
             android:maxLines="1"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewNoteFavorite"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/textViewNoteContent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="TextView"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="4dp"
             android:textStyle="italic"
-            app:layout_constraintTop_toBottomOf="@+id/textViewNoteTitle" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewNoteTitle" />
 
         <ImageView
             android:id="@+id/imageViewNoteFavorite"

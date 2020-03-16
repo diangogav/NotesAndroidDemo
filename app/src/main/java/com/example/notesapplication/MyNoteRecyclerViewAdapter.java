@@ -41,6 +41,8 @@ public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecycl
 
         if(holder.mItem.isFavorite()) {
             holder.mImageViewFavorite.setImageResource(R.drawable.ic_star_black_24dp);
+        }else{
+            holder.mImageViewFavorite.setImageResource(R.drawable.ic_star_border_black_24dp);
         }
     }
 
